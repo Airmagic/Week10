@@ -9,7 +9,7 @@ var flash = require('express-flash');
 var session = require('express-session');
 
 //Setting the enviroments variable Mongo_URL to the correct URL
-var db_url = process.env.Mongo_URL;
+var db_url = process.env.MONGO_URL;
 mongoose.Promise = global.Promise;
 
 //connection to mongoose, log success or error
