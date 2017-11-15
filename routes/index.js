@@ -56,7 +56,7 @@ router.get('/bird/:_id', function(req, res, next){
 /* post to add a new sighting for a bird. bird id is expected in the body */
 router.post('/addSighting', function(req, res, next){
 	
-	Bird.findOneAndUpdate({_id: req.body._id}, {$push : {datesSeen : req.body.date}})
+	Bird.findOneAndUpdate({_id: req.body._id}, {$push : {datesSeen : req.body.date}}, {runValidators: true} )
 		.then( (doc) => {
 			if (doc) {
 				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
@@ -67,8 +67,8 @@ router.post('/addSighting', function(req, res, next){
 		})
 		.catch((err) => {
 			console.log(err);
-			next(err);
-			/* if (err.name === 'CastError'){
+			
+			if (err.name === 'CastError'){
 				req.flash('error', 'Date must be in a valid date format');
 				res.redirect('/bird/' + req.body_id);
 			}
@@ -78,7 +78,7 @@ router.post('/addSighting', function(req, res, next){
 			}
 			else {
 				next(err);
-			} */
+			}
 		});
 });
 
