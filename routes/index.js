@@ -19,17 +19,28 @@ router.post('/addBird', function(req, res, next){
 	
 	//use form data to make a new bird, then save to dbbird
 	var bird = Bird(req.body);
+	
+	//form data can only be in key value pairs
+	bird.nest = {
+		location: req.body.nestLocation,
+		materials: req.body.nestMaterials
+	}
+	//saves new bird infomation in the db
 	bird.save()
 		.then( (doc) => {
-			console.log(doc);
+			//if you want a printout in your db runner terminal
+			/* console.log(doc); */
 			res.redirect('/')
 		})
 		.catch( (err) => {
 			if (err.name === 'ValidationError'){
+				// checks for validation errors
+				//if more than one error all will be combined
 				req.flash('error', err.message);
 				res.redirect('/');
 			}
 			else {
+				//passes a generic error
 				next(err);
 			}
 		});
@@ -40,12 +51,18 @@ router.get('/bird/:_id', function(req, res, next){
 	
 	Bird.findOne( {_id: req.params._id})
 		.then((doc) => {
+			//decided to go with sorting the array
 			if (doc){
+				/*doc.datesSeen = doc.datesSeen.sort(function(a, b){
+					if (a && b){
+						return a.getTime() - b.getTime();
+					}
+				}); */
 				res.render('bird', {bird: doc});
 			}
 			else {
 				res.status(404);
-				next(Error('Bird not found'));
+				next(Error('Bird not found'));//error handleEvent
 			}
 		})
 		.catch ((err) => {
@@ -56,7 +73,7 @@ router.get('/bird/:_id', function(req, res, next){
 /* post to add a new sighting for a bird. bird id is expected in the body */
 router.post('/addSighting', function(req, res, next){
 	
-	Bird.findOneAndUpdate({_id: req.body._id}, {$push : {datesSeen : req.body.date}}, {runValidators: true} )
+	Bird.findOneAndUpdate({_id: req.body._id}, {$push : {datesSeen : { $each : [req.body.date], $sort: 1} }}, {runValidators: true} )
 		.then( (doc) => {
 			if (doc) {
 				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
@@ -82,5 +99,25 @@ router.post('/addSighting', function(req, res, next){
 		});
 });
 
+/* Post task to delete a bird */
+router.post('/delete', function(req, res, next){
+	
+	Bird.findOneAndDelete( {_id: req.body._id})
+	.then( (doc) => {
+		if (doc.lastErrorObject.n === 1){
+			res.redirect('/');
+		}
+		else {
+			// If the task disappers. 404 error
+			var notFound = Error('Task not found');
+			notFound.status = 404;
+			next(notFound);
+		}
+	})
+		
+	.catch( (err) => {
+		next(err);
+	});
+});
 
 module.exports = router;

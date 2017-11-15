@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
+
 /*information about a birds species, and the dates thsi bird was seen*/
 
 var birdSchema = new mongoose.Schema({
@@ -30,7 +31,11 @@ var birdSchema = new mongoose.Schema({
 		},
 		message: 'Date must be a valid date and before the current time.'
 	}
-	}] // An array of dates a bird of this species was seen
+	}], // An array of dates a bird of this species was seen
+	nest: {
+		location: String,
+		materials: String
+	}
 });
 
 var Bird = mongoose.model('Bird', birdSchema);

@@ -7,8 +7,8 @@
 <form method = "POST" action="/addBird">
 	Name: <input name="name" required/>
 	<br>Decription: <input name='description'/>
-	<br>Average Eggs: <input name='averageEggs'/>
-	<br>Endangered ? <input type='checkbox' name='endangered'/>
+	<br>Average Eggs: <input type= 'number' min='1' max='40' value='1' name='averageEggs'/>
+	<br>Endangered? <input type='checkbox' name='endangered'/>
 	<br>Nest Location: <input name='nestLocation'>
 	<br>Nest Materials: <input name='nestMaterials'>
 	<br><input type='submit' value='Submit Entry'>
@@ -27,13 +27,20 @@
 	
 	<div class='bird-summary'>
 	
-	{{#each birds}}
-		<h3>{{this.name}}</h3>
-		<p>{{this.description}}</p>
-		<p><a href="/bird/{{this._id}}">{{this.name}} info and sightings</a></p>
-	{{else}}
-		<p>No birds in the database.</p>
-		{{/each}}
+		{{#each birds}}
+			<h3>{{this.name}}</h3>
+			<p>{{this.description}}</p>
+			<p><a href="/bird/{{this._id}}">{{this.name}} info and sightings</a></p>
+			
+			{{! A button to delete the bird from the DB }}
+			<form action='/delete' method='POST' class='delete_form'>
+				<input type='hidden' name='_id' value='{{bird._id}}'>
+				<input class='deleteButton' type='submit' name='delete' value='Delete'>
+			</form>
+
+		{{else}}
+			<p>No birds in the database.</p>
+			{{/each}}
 		
 	</div>
 	
