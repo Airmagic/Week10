@@ -35,12 +35,12 @@
 		
 		<div class='flash-errors'>
 			{{#if messages}}
-				<p class='error-messages'>{{message.error}}</p>
+				<p class='error-messages'>{{messages.error}}</p>
 			{{/if}}
 		</div>
 		
 		<div class='sighting-list'>
-			{{#each bird.dateSeen}}
+			{{#each bird.datesSeen}}
 				<p>{{this}}</p>
 			{{else}}
 				<p>No sightings for {{bird.name}}

@@ -7,7 +7,7 @@ var birdSchema = new mongoose.Schema({
 	name: { type: String,
 	required: [true, 'Bird name is required.'],
 	unique: true,
-	iniqueCaseInsensitive: true,
+	uniqueCaseInsensitive: true,
 	validate: {
 		validator: function(n) {
 			return n.length >= 2;
