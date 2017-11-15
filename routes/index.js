@@ -55,6 +55,7 @@ router.get('/bird/:_id', function(req, res, next){
 
 /* post to add a new sighting for a bird. bird id is expected in the body */
 router.post('/addSighting', function(req, res, next){
+	
 	Bird.findOneAndUpdate({_id: req.body._id}, {$push : {datesSeen : req.body.date}}, {runValidators: true} )
 		.then( (doc) => {
 			if (doc) {
