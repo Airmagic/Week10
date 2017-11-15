@@ -1,11 +1,12 @@
 <h1>{{bird.name}}</h1>
 
 <div class="bird-info">
+
 	<h2>Description</h2>
 	
 	<p>{{bird.description}}</p>
 	
-	<h2>Average Eggs Laid<h2>
+	<h2>Average Eggs Laid</h2>
 	
 	<p>{{bird.averageEggs}}</p>
 	
@@ -40,11 +41,13 @@
 		</div>
 		
 		<div class='sighting-list'>
-			{{#each bird.datesSeen}}
-				<p>{{this}}</p>
-			{{else}}
-				<p>No sightings for {{bird.name}}
-			{{/each}}
+			<div class="sighting">
+				{{#each bird.datesSeen}}
+					<p>{{this}}</p>
+				{{else}}
+					<p>No sightings for {{bird.name}}
+				{{/each}}
+			</div>
 		</div>
 	</div>
 

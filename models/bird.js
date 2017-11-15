@@ -20,7 +20,9 @@ var birdSchema = new mongoose.Schema({
 		min:[1, 'Should be more than 1 egg.'],
 		max: [40,'Should not be more than 40 eggs']}, // number of eggs that was found in nest
 	endangered: {type: Boolean, default: false }, // Is the bird becoming extincted?
-	datesSeen: [{ type: Date, required: true, 
+	datesSeen: [{ 
+	type: Date,
+	required: true, 
 	validate: {
 		validator: function(d) {
 			if (!d) {return false;}
