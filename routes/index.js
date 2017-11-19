@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Bird = require('../models/bird');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	
@@ -20,11 +21,18 @@ router.post('/addBird', function(req, res, next){
 	//use form data to make a new bird, then save to dbbird
 	var bird = Bird(req.body);
 	
-	//form data can only be in key value pairs
+	//form data can only be in key value pairs. adding the nesting material and location
 	bird.nest = {
 		location: req.body.nestLocation,
 		materials: req.body.nestMaterials
-	}
+	};
+	
+	//adding key value pair for the hight of the bird
+	bird.height = {
+		height: req.body.birdHeight
+	};
+	
+	
 	//saves new bird infomation in the db
 	bird.save()
 		.then( (doc) => {
@@ -73,6 +81,7 @@ router.get('/bird/:_id', function(req, res, next){
 /* post to add a new sighting for a bird. bird id is expected in the body */
 router.post('/addSighting', function(req, res, next){
 	
+	
 	Bird.findOneAndUpdate({_id: req.body._id}, {$push : {datesSeen : { $each : [req.body.date], $sort: 1} }}, {runValidators: true} )
 		.then( (doc) => {
 			if (doc) {
@@ -102,22 +111,21 @@ router.post('/addSighting', function(req, res, next){
 /* Post task to delete a bird */
 router.post('/delete', function(req, res, next){
 	
-	Bird.findOneAndDelete( {_id: req.body._id})
-	.then( (doc) => {
-		if (doc.lastErrorObject.n === 1){
-			res.redirect('/');
-		}
-		else {
-			// If the task disappers. 404 error
-			var notFound = Error('Task not found');
-			notFound.status = 404;
-			next(notFound);
-		}
-	})
-		
-	.catch( (err) => {
-		next(err);
-	});
+	Bird.deleteOne({_id : req.body._id })
+		.then((result) => {
+			if (result.deleteCount === 1) {
+				res.redirect('/');
+			}
+			else {
+				res.redirect('/');
+				res.status(404).send('Error deleting bird: not found');
+				
+			}
+		})
+      .catch((err) => {
+        next(err);
+      });
+	
 });
 
 module.exports = router;

@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-
 /*information about a birds species, and the dates thsi bird was seen*/
 
 var birdSchema = new mongoose.Schema({
@@ -26,7 +25,7 @@ var birdSchema = new mongoose.Schema({
 	required: true, 
 	validate: {
 		validator: function(d) {
-			if (!d) {return false;}
+			if (!d) {return false};
 			return d.getTime() <= Date.now();
 		},
 		message: 'Date must be a valid date and before the current time.'
@@ -35,6 +34,14 @@ var birdSchema = new mongoose.Schema({
 	nest: {
 		location: String,
 		materials: String
+	},
+	
+	//setting the bird height parameters
+	height: {
+		height: {type: Number, 
+		min:[1, 'Should be more than 1cm in height'],
+		max:[300, 'Should not be more than 300cm in height']
+		}
 	}
 });
 

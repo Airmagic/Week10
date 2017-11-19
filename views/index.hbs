@@ -9,8 +9,9 @@
 	<br>Decription: <input name='description'/>
 	<br>Average Eggs: <input type= 'number' min='1' max='40' value='1' name='averageEggs'/>
 	<br>Endangered? <input type='checkbox' name='endangered'/>
-	<br>Nest Location: <input name='nestLocation'>
-	<br>Nest Materials: <input name='nestMaterials'>
+	<br>Nest Location: <input name='nestLocation'/>
+	<br>Nest Materials: <input name='nestMaterials'/>
+	<br>Height: <input type='number' min='1' max='300' name='birdHeight' value='1'> in cm</br>
 	<br><input type='submit' value='Submit Entry'>
 </form>
 	<div class='flash-errors'>
@@ -32,12 +33,6 @@
 			<p>{{this.description}}</p>
 			<p><a href="/bird/{{this._id}}">{{this.name}} info and sightings</a></p>
 			
-			{{! A button to delete the bird from the DB }}
-			<form action='/delete' method='POST' class='delete_form'>
-				<input type='hidden' name='_id' value='{{bird._id}}'>
-				<input class='deleteButton' type='submit' name='delete' value='Delete'>
-			</form>
-
 		{{else}}
 			<p>No birds in the database.</p>
 			{{/each}}

@@ -30,7 +30,10 @@
 	<h2>Nest Imformation</h2>
 	<p>Location: {{bird.nest.location}}</p>
 	<p>Materials: {{bird.nest.materials}}</p>
-	
+
+	{{! info on the height of the bird }}
+	<h2>Height</h2>
+	<p>Height of the bird: {{bird.height.height}}</p>
 </div>
 
 
@@ -41,7 +44,7 @@
 	{{! A button to delete the bird from the DB }}
 			<form action='/delete' method='POST' class='delete_form'>
 				<input type='hidden' name='_id' value='{{bird._id}}'>
-				<input class='deleteButton' type='submit' name='delete' value='Delete'>
+				<input class='delete_button' type='submit' name='delete' value='Delete'>
 			</form>
 	
 	<h2>Dates Seen</h2>
@@ -62,7 +65,7 @@
 		{{! if there is a error it will go to flash }}
 		<div class='flash-errors'>
 			{{#if messages}}
-				<p class='error-messages'>{{messages.error}}</p>
+				<p class='error-message'>{{messages.error}}</p>
 			{{/if}}
 		</div>
 		
