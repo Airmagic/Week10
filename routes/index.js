@@ -108,6 +108,67 @@ router.post('/addSighting', function(req, res, next){
 		});
 });
 
+
+/* post to change description for a bird. bird id is expected in the body */
+router.post('/changeDescription', function(req, res, next){
+	
+	
+	Bird.findOneAndUpdate({_id: req.body._id}, {description :[req.body.description] } )
+		.then( (doc) => {
+			if (doc) {
+				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
+			}
+			else {
+				res.status(404); next(Error('Attempt to change description of a bird not in database'))
+			}
+		})
+		.catch((err) => {
+			console.log(err);			
+			if (err.name === 'CastError'){
+				req.flash('error', 'Sorry, something happened in your description');
+				res.redirect('/bird/' + req.body._id);
+			}
+			else if (err.name === 'ValidationError'){
+				req.flash('error', err.message);
+				res.redirect('/bird/ + req.body._id');
+			}
+			else {
+				next(err);
+			}
+		});
+});
+
+/* post to average eggs for a bird. bird id is expected in the body */
+router.post('/changeAverageEggs', function(req, res, next){
+	
+	
+	Bird.findOneAndUpdate({_id: req.body._id}, {averageEggs :[req.body.averageEggs] } )
+		.then( (doc) => {
+			if (doc) {
+				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
+			}
+			else {
+				res.status(404); next(Error('Attempt to change the average eggs of a bird not in database'))
+			}
+		})
+		.catch((err) => {
+			console.log(err);			
+			if (err.name === 'CastError'){
+				req.flash('error', 'Sorry, something happened to average eggs');
+				res.redirect('/bird/' + req.body._id);
+			}
+			else if (err.name === 'ValidationError'){
+				req.flash('error', err.message);
+				res.redirect('/bird/ + req.body._id');
+			}
+			else {
+				next(err);
+			}
+		});
+});
+
+
+
 /* Post task to delete a bird */
 router.post('/delete', function(req, res, next){
 	

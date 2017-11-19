@@ -2,6 +2,7 @@
 
 {{! calling the name of the bird from the server }}
 <h1>{{bird.name}}</h1>
+	
 
 {{! Bird Info class }}
 <div class="bird-info">
@@ -9,13 +10,25 @@
 	<h2>Description</h2>
 	
 	{{! Calling the description from the server }}
-	<p>{{bird.description}}</p>
+	<p>You can add or change the description</p>
+	<form method='POST' action="/changeDescription">
+		<textarea rows="16" cols="26" name="description">{{bird.description}}</textarea>
+		<input type='hidden' name='_id' value='{{bird._id}}'>
+		<br><input type='submit' value='Submit'>
+	</form>
+	
 	
 	
 	<h2>Average Eggs Laid</h2>
 	
 	{{! calling the eggs from the server }}
-	<p>{{bird.averageEggs}}</p>
+	<p>You can add or change the the average number of eggs</p>
+	<form method='POST' action='/changeAverageEggs'>
+		<input type='number' min='1' max='40' name='averageEggs' value='{{bird.averageEggs}}'>
+		<input type='hidden' name='_id' value='{{bird._id}}'>
+		<br><input type='submit' value='Submit'>
+	</form>
+	
 	
 	<h2>Conservation Status</h2>
 	
@@ -28,12 +41,12 @@
 	
 	{{! getting the nest info from the server }}
 	<h2>Nest Imformation</h2>
-	<p>Location: {{bird.nest.location}}</p>
-	<p>Materials: {{bird.nest.materials}}</p>
+	<p>Location: <input name='nestLocation' value='{{bird.nest.location}}'/>
+	<p>Materials: <input name='nestMaterials' value='{{bird.nest.materials}}'/>
 
 	{{! info on the height of the bird }}
 	<h2>Height</h2>
-	<p>Height of the bird: {{bird.height.height}}</p>
+	<p>Height of the bird: <input type='number' min='1' max='300' name='birdHeight' value='{{bird.height.height}}'>cm</p>
 </div>
 
 
