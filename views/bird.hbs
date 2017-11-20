@@ -11,6 +11,7 @@
 	
 	{{! Calling the description from the server }}
 	<p>You can add or change the description</p>
+	{{! making a form to make changes to the description }}
 	<form method='POST' action="/changeDescription">
 		<textarea rows="16" cols="26" name="description">{{bird.description}}</textarea>
 		<input type='hidden' name='_id' value='{{bird._id}}'>
@@ -23,6 +24,8 @@
 	
 	{{! calling the eggs from the server }}
 	<p>You can add or change the the average number of eggs</p>
+	
+	{{! making a form to post a canged to average eggs }}
 	<form method='POST' action='/changeAverageEggs'>
 		<input type='number' min='1' max='40' name='averageEggs' value='{{bird.averageEggs}}'>
 		<input type='hidden' name='_id' value='{{bird._id}}'>
@@ -41,8 +44,17 @@
 	
 	{{! getting the nest info from the server }}
 	<h2>Nest Imformation</h2>
-	<p>Location: <input name='nestLocation' value='{{bird.nest.location}}'/>
-	<p>Materials: <input name='nestMaterials' value='{{bird.nest.materials}}'/>
+	<p>Location: </p>
+	{{! making a form to post info to change nest location }}
+	<form method='POST' action='/changeNest'>
+		<textarea rows="1" cols="26" name="nestLocation">{{bird.nest.location}}</textarea>
+		<p>Materials:</p>
+		<textarea rows="1" cols="26" name="nestMaterials">{{bird.nest.materials}}</textarea>
+		<input type='hidden' name='_id' value='{{bird._id}}'>
+		<br><input type='submit' value='Submit'>
+	</form>
+	
+	
 
 	{{! info on the height of the bird }}
 	<h2>Height</h2>

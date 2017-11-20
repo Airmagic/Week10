@@ -167,7 +167,63 @@ router.post('/changeAverageEggs', function(req, res, next){
 		});
 });
 
+//post to change the location of the nest information
+router.post('/changeNest', function(req, res, next){
+	
+	
+	Bird.findOneAndUpdate({_id: req.body._id}, {nest:{location :[req.body.nestLocation], materials :[req.body.nestMaterials] }} )
+		.then( (doc) => {
+			if (doc) {
+				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
+			}
+			else {
+				res.status(404); next(Error('Attempt to change nest location of a bird not in database'))
+			}
+		})
+		.catch((err) => {
+			console.log(err);			
+			if (err.name === 'CastError'){
+				req.flash('error', 'Sorry, something happened in your nest location');
+				res.redirect('/bird/' + req.body._id);
+			}
+			else if (err.name === 'ValidationError'){
+				req.flash('error', err.message);
+				res.redirect('/bird/ + req.body._id');
+			}
+			else {
+				next(err);
+			}
+		});
+});
 
+//post to change the material of the nest information
+/* router.post('/changeNestMaterials', function(req, res, next){
+	
+	
+	Bird.findOneAndUpdate({_id: req.body._id}, {nest:{materials :[req.body.nestMaterials] }} )
+		.then( (doc) => {
+			if (doc) {
+				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
+			}
+			else {
+				res.status(404); next(Error('Attempt to change nest materials of a bird not in database'))
+			}
+		})
+		.catch((err) => {
+			console.log(err);			
+			if (err.name === 'CastError'){
+				req.flash('error', 'Sorry, something happened in your nest materials');
+				res.redirect('/bird/' + req.body._id);
+			}
+			else if (err.name === 'ValidationError'){
+				req.flash('error', err.message);
+				res.redirect('/bird/ + req.body._id');
+			}
+			else {
+				next(err);
+			}
+		});
+}); */
 
 /* Post task to delete a bird */
 router.post('/delete', function(req, res, next){
