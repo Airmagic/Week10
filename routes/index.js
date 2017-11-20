@@ -197,10 +197,10 @@ router.post('/changeNest', function(req, res, next){
 });
 
 //post to change the material of the nest information
-/* router.post('/changeNestMaterials', function(req, res, next){
+router.post('/changeHeight', function(req, res, next){
 	
 	
-	Bird.findOneAndUpdate({_id: req.body._id}, {nest:{materials :[req.body.nestMaterials] }} )
+	Bird.findOneAndUpdate({_id: req.body._id}, {height:{height :[req.body.height] }} )
 		.then( (doc) => {
 			if (doc) {
 				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
@@ -223,7 +223,7 @@ router.post('/changeNest', function(req, res, next){
 				next(err);
 			}
 		});
-}); */
+});
 
 /* Post task to delete a bird */
 router.post('/delete', function(req, res, next){
