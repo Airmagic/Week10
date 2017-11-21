@@ -18,5 +18,9 @@
     "mongoose-unique-validator": "^1.0.6",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5"
+  },
+  "engines":{
+   "node":"v6.11.2"
+   "npm":"3.10.10"
   }
 }
