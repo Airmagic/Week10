@@ -1,7 +1,35 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color:blue;
+  color: white;
 }
+
+h1 {
+ Text-align: center;
+ text-decoration: underline;
+}
+
+.submit{
+	background-color: green;
+	color: yellow;
+}
+
+.submit:hover{
+	background-color:#7fff5b;
+}
+
+.delete_button{
+	background-color:red;
+	color:white;
+}
+
+.delete_button:hover{
+	color: green;
+	background-color: #ff5b5b;
+}
+
+
 
 a {
   color: #00B7FF;

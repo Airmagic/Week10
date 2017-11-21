@@ -1,5 +1,4 @@
 
-
 {{! calling the name of the bird from the server }}
 <h1>{{bird.name}}</h1>
 	
@@ -15,7 +14,7 @@
 	<form method='POST' action="/changeDescription">
 		<textarea rows="16" cols="26" name="description">{{bird.description}}</textarea>
 		<input type='hidden' name='_id' value='{{bird._id}}'>
-		<br><input type='submit' value='Submit'>
+		<br><input class='submit' type='submit' value='Submit'>
 	</form>
 	
 	
@@ -29,7 +28,7 @@
 	<form method='POST' action='/changeAverageEggs'>
 		<input type='number' min='1' max='40' name='averageEggs' value='{{bird.averageEggs}}'>
 		<input type='hidden' name='_id' value='{{bird._id}}'>
-		<br><input type='submit' value='Submit'>
+		<br><input class='submit' type='submit' value='Submit'>
 	</form>
 	
 	
@@ -51,7 +50,7 @@
 		<p>Materials:</p>
 		<textarea rows="1" cols="26" name="nestMaterials">{{bird.nest.materials}}</textarea>
 		<input type='hidden' name='_id' value='{{bird._id}}'>
-		<br><input type='submit' value='Submit'>
+		<br><input class='submit' type='submit' value='Submit'>
 	</form>
 	
 	
@@ -62,7 +61,7 @@
 		<p>Height of the bird:
 		<input type='number' min='1' max='300' name="height" value='{{bird.height.height}}'>cm</p>
 		<input type='hidden' name='_id' value='{{bird._id}}'>
-		</br><input type='submit' value='Submit'>
+		</br><input class='submit' type='submit' value='Submit'>
 	</form>
 </div>
 
@@ -92,7 +91,7 @@
 		<form method='POST' action="/addSighting">
 			Sighting date: <input type='date' name='date'>
 			<input type='hidden' name='_id' value='{{bird._id}}'>
-			<input type='submit' value='Submit'>
+			<input class='submit' type='submit' value='Submit'>
 		</form>
 		
 		{{! if there is a error it will go to flash }}

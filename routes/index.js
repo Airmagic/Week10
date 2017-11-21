@@ -142,7 +142,7 @@ router.post('/changeDescription', function(req, res, next){
 router.post('/changeAverageEggs', function(req, res, next){
 	
 	
-	Bird.findOneAndUpdate({_id: req.body._id}, {averageEggs :[req.body.averageEggs] } )
+	Bird.findOneAndUpdate({_id: req.body._id}, {averageEggs :req.body.averageEggs } )
 		.then( (doc) => {
 			if (doc) {
 				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
@@ -200,7 +200,7 @@ router.post('/changeNest', function(req, res, next){
 router.post('/changeHeight', function(req, res, next){
 	
 	
-	Bird.findOneAndUpdate({_id: req.body._id}, {height:{height :[req.body.height] }} )
+	Bird.findOneAndUpdate({_id: req.body._id}, {height:{height :req.body.height }} )
 		.then( (doc) => {
 			if (doc) {
 				res.redirect('/bird/' + req.body._id); //redirects to this bird's info page
