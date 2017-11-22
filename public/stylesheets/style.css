@@ -1,36 +1,41 @@
+
+/* style for the body of the webpage */
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color:blue;
   color: white;
 }
-
+/*style for the header 1 */
 h1 {
  Text-align: center;
  text-decoration: underline;
 }
 
+/* style for the class = submit */
 .submit{
 	background-color: green;
 	color: yellow;
 }
 
+/* style for the mouse over class= submit */
 .submit:hover{
 	background-color:#7fff5b;
 }
 
+/* style for the class = delete_button */
 .delete_button{
 	background-color:red;
 	color:white;
 }
-
+/* style for mouse over class = delete_button */
 .delete_button:hover{
 	color: green;
 	background-color: #ff5b5b;
 }
 
 
-
+/* style for hyperlinks */
 a {
   color: #00B7FF;
 }
